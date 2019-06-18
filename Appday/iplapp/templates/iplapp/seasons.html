@@ -1,0 +1,94 @@
+{% load static %}
+<style>
+table, td{
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 20%;
+}
+
+th, td {
+  padding: 15px;
+}
+     .mybutton{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+</style>
+<script>
+    function displaymatches(){
+      var x=document.getElementById("seasons");
+      var value = x.options[x.selectedIndex].value;
+      var url="http://127.0.0.1:8000/seasonspage/"+value+'/';
+      console.log(url);
+      window.location.replace(url);
+    }
+</script>
+<button type="submit" class="mybutton"><a href="{% url 'logout' %}">LogOut</a></button>
+<form>
+    <select id="seasons" onChange="displaymatches()">
+        <option value="seasons">seasons</option>
+        <option value="2008">2008</option>
+         <option value="2009">2009</option>
+         <option value="2010">2010</option>
+          <option value="2011">2011</option>
+         <option value="2012">2012</option>
+         <option value="2013">2013</option>
+         <option value="2014">2014</option>
+         <option value="2015">2015</option>
+         <option value="2016">2016</option>
+         <option value="2017">2017</option>
+         <option value="2018">2018</option>
+         <option value="2019">2019</option>
+    </select>
+</form>
+{% if queryset %}
+    <h1 align="center">Season {{season}}</h1>
+<center>
+    <table>
+    <tr><td><b>Team1</b></td>
+        <td><b>Team2</b></td>
+        <td><b>Venue</b></td>
+        <td><b>TossResult</b></td>
+        <td><b>TossDecision</b></td>
+        <td><b>Result</b></td>
+        <td><b>Playerofmatch</b></td>
+        <td><b>ViewMatch Details</b></td>
+    </tr>
+    {% for x in queryset %}
+        <tr><td>{{ x.team1 }}</td>
+            <td>{{ x.team2 }}</td>
+            <td>{{ x.venue }}</td>
+            <td>{{x.result}}</td>
+            <td>{{x.toss_decision }}</td>
+            <td>{{x.winner }}</td>
+            <td>{{ x.player_of_match }}</td>
+            <td><button type="submit"><a href="{% url 'matchdetails_html' x.match_id x.id%}">viewdetails</a></button></td>
+        </tr>
+    {% endfor %}
+     </table>
+    </center>
+{% endif %}
+<div class = "container">
+  <div class = "col-md-6">
+    <ul class="pager">
+      <span class="step-links">
+        {% if queryset.has_previous %}
+        <a href="?page={{ queryset.previous_page_number }}">Previous</a>
+        {% else %}
+        <a title = "No Posts available">Previous</a>
+        {% endif %}
+        {% if queryset.has_next %}
+            <br><br>
+        <a href="?page={{ queryset.next_page_number }}">Next</a>
+        {% else %}
+        <a title = "No Posts available">Next</a>
+        {% endif %}
+        </span>
+     </ul>
+  </div>
+</div>

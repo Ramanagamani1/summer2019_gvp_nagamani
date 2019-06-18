@@ -1,0 +1,61 @@
+{% load static %}
+<style>
+table, td{
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 20%;
+}
+
+th, td {
+  padding: 15px;
+}
+</style>
+<script>
+    function displaypointstable(){
+      var x=document.getElementById("seasons");
+      var value = x.options[x.selectedIndex].value;
+      var url="http://127.0.0.1:8000/points/"+value+'/';
+      console.log(url);
+      window.location.replace(url);
+    }
+</script>
+<form>
+    <center>
+    <select id="seasons" onChange="displaypointstable()">
+        <option value="seasons">seasons</option>
+        <option value="2008">2008</option>
+         <option value="2009">2009</option>
+         <option value="2010">2010</option>
+          <option value="2011">2011</option>
+         <option value="2012">2012</option>
+         <option value="2013">2013</option>
+         <option value="2014">2014</option>
+         <option value="2015">2015</option>
+         <option value="2016">2016</option>
+         <option value="2017">2017</option>
+         <option value="2018">2018</option>
+         <option value="2019">2019</option>
+    </select>
+        </center>
+</form>
+<br><br>
+{% if points_info %}
+    <center>
+    <h3>Season {{ season }}</h3>
+    <table>
+        <tr><td><b>Team</b></td>
+            <td></td>
+            <td><b>Score</b></td></tr>
+   {% for k,v in points_info %}
+       <tr><td>{{ k }}<td>
+           <td>{{ v }}</td>
+       </tr>
+
+    {% endfor %}
+    </table>
+    </center>
+{% endif %}
