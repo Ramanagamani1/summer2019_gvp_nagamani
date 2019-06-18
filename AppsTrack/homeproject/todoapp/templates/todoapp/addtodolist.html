@@ -1,0 +1,18 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'forms.css' %}">
+<body align="center">
+
+<div class="login-page">
+     <h2>Add TodoList</h2>
+    <div class="form">
+
+<form name="form" method="POST">
+    {% csrf_token %}
+    {{ form.name }}<br><br>
+    {{form.created}}<br><br>
+    <button type="submit">Add</button>
+</form>
+    </div>
+</div>
+</body>
+</html>

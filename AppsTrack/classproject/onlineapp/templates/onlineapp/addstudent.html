@@ -1,0 +1,28 @@
+{% load static %}
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="{% static 'forms.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body align="center">
+<div class="login-page">
+<h2>Add Student</h2>
+<div class="form">
+<form name="form" method="POST">
+     {% csrf_token %}
+    Name:{{ form1.name }}<br><br>
+    Email:{{form1.email}}<br><br>
+    db_folder:{{form1.db_folder}}<br><br>
+    problem1:{{form2.problem1}}<br><br>
+    problem2:{{form2.problem2}}<br><br>
+    problem3:{{form2.problem3}}<br><br>
+    problem4:{{form2.problem4}}<br><br>
+
+    dropped_out:{{form1.dropped_out}}<br><br>
+    <button type="submit">Add Student</button>
+</form>
+    </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% load static %}
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="{% static 'forms.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body align="center">
+<div class="login-page">
+
+<h2>Signup</h2>
+ <div class="form">
+<form name="form" method="POST">
+    {% csrf_token %}
+    {{form.first_name}}<br><br>
+    {{form.last_name}}<br><br>
+    {{form.username}}<br><br>
+    {{form.password}}<br><br>
+    <button type="Submit">Signup</button><br><br>
+    <a href="{% url 'loginform' %}">Login Here</a>
+</form>
+</div>
+    </div>
+</body>
+</html>

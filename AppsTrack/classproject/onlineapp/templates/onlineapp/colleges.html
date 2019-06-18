@@ -1,0 +1,32 @@
+{% load static %}
+<html >
+<link rel="stylesheet" type="text/css" href="{% static 'w3.css' %}">
+<style>
+    .mybutton{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+</style>
+{% if colleges %}
+<a href="{% static 'mrnd.png' %}"><img src="{% static 'mrnd.png' %}" width="120" height="70"></a>
+<button type="submit" class="mybutton"><a href="{% url 'logout' %}">Log out</a></button>
+<h3 style="text-align:center">Participating Colleges</h3>
+  <button type="submit"><a href="{% url 'addcolleges' %}">Add College</a></button><br><br>
+ <div class="w3-container">
+    <table class="w3-table-all">
+        <tr class="w3-green"><th>Code</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    {% for x in colleges %}
+        <tr><td>{{x.acronym}}</td><td><a href="{% url 'student_html' x.id%}" style="color:blue">{{x.name}}</a></td><td><a href="{% url 'edit_college' x.id %}" style="color:blue">edit</a>|<a href="{% url 'delete_college' x.id%}" style="color:blue">delete</a></td>
+            </tr>
+    {% endfor %}
+    </table>
+     </div>
+
+{% else %}
+    <p>No data is available</p>
+{% endif %}
+</html>

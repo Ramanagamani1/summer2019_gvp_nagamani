@@ -1,0 +1,20 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'forms.css' %}">
+<body align="center">
+
+<div class="login-page">
+     <h2>Add College</h2>
+    <div class="form">
+
+<form name="form" method="POST">
+    {% csrf_token %}
+    {{ form.name }}<br><br>
+   {{form.location}}<br><br>
+   {{form.acronym}}<br><br>
+    {{form.contact}}<br><br>
+    <button type="submit">Add College</button>
+</form>
+    </div>
+</div>
+</body>
+</html>

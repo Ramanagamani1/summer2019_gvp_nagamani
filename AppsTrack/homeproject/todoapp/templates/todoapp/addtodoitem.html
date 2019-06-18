@@ -1,0 +1,23 @@
+{% load static %}
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="{% static 'forms.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body align="center">
+<div class="login-page">
+<h2>Add Item</h2>
+<div class="form">
+<form name="form" method="POST">
+     {% csrf_token %}
+    {{ form.description }}<br><br>
+    {{ form.due_date }}<br><br>
+
+    completed:{{form.completed}}<br><br>
+    <button type="submit">Add Item</button>
+</form>
+    </div>
+    </div>
+</body>
+</html>

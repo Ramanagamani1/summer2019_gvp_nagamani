@@ -1,0 +1,35 @@
+{% load static %}
+<html >
+<link rel="stylesheet" type="text/css" href="{% static 'w3.css' %}">
+<style>
+    .mybutton{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+</style>
+{% if todo_lists %}
+
+<button type="submit" class="mybutton"><a href="{% url 'logout' %}">Log out</a></button>
+<h3 style="text-align:center">My TodoLists</h3>
+
+  <button type="submit"><a href="{% url 'addtodolists' %}">Add todolist</a></button><br><br>
+ <div class="w3-container">
+    <table class="w3-table-all">
+        <tr class="w3-green">
+            <th>Name</th>
+            <th>Date created</th>
+            <th>Action</th>
+        </tr>
+    {% for x in todo_lists %}
+        <tr><td><a href="{%  url 'todoitems_html' x.id%}">{{x.name}}</a></td>
+            <td>{{ x.created }}</td>
+            <td><a href="{%  url 'edit_todolist' x.id%}" style="color:blue">edit</a>|<a href="{% url 'delete_todolist' x.id%}" style="color:blue">delete</a></td>
+            </tr>
+    {% endfor %}
+    </table>
+     </div>
+{% else %}
+    <p>No data is available</p>
+{% endif %}
+</html>

@@ -1,0 +1,28 @@
+{% load static %}
+<html>
+<link rel="stylesheet" type="text/css" href="{% static 'w3.css' %}">
+<h2 style="text-align:center">{{todo_list.name}}</h2>
+
+<button type="submit" style="margin:5px;"><a href="{%  url 'addtodoitem' todo_list.id%}">AddItem</a></button><br><br>
+<div class="w3-container">
+    <table class="w3-table-all">
+        <tr class="w3-green">
+            <th>Description</th>
+            <th>Duedate</th>
+            <th>Completed</th>
+            <th>Action</th>
+        </tr>
+        {% if todoitems%}
+    {% for x in todoitems %}
+        <tr><td>{{x.description}}</td><td>{{x.due_date}}</td><td>{{x.completed}}</td>
+        <td><a href="{% url 'edit_todoitem' x.id %}" style="color:blue">edit</a>|<a href="{% url 'delete_todoitem' x.id %}" style="color:blue">delete</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+    <br><br><br>
+
+{% else %}
+    <p>No data is available</p>
+{% endif %}
+</html>
