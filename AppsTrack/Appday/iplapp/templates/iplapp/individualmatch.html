@@ -1,0 +1,140 @@
+{% load static %}
+<html align="center">
+<style>
+table, td{
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 20%;
+}
+
+th, td {
+  padding: 15px;
+}
+</style>
+<script>
+function displayinn(evt, innings) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(innings).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+
+</script>
+{% if season_details %}
+        <p><b>Team1:</b>{{ season_details.team1 }}</p>
+        <p><b>Team2:</b>{{ season_details.team2 }}</p>
+        <p><b>Tossresult:</b>{{ season_details.toss_winner }}</p>
+        <p><b>TossDecision:</b>{{season_details.toss_decision  }}</p>
+        <p><b>Winner:</b>{{ season_details.winner }}</p>
+        <p><b>Win_by_runs:</b>{{ season_details.win_by_runs }}</p>
+        <p><b>Win_by_wickets:</b>{{ season_details.win_by_wickets }}</p>
+        <p><b>Man_of_match:</b>{{ season_details.player_of_match }}</p><br><br>
+
+{% endif %}
+{% if topscorers_list %}
+    <h2>Top3 RunScorers</h2>
+    <center>
+    <table>
+    <tr><td><b>Player name</b></td>
+        <td><b>Team</b></td>
+        <td><b>Runs</b></td>
+    </tr>
+        {% for x in topscorers_list %}
+    <tr><td>{{ x.batsman }}</td>
+        <td>{{ x.batting_team }}</td>
+        <td>{{ x.score }}</td>
+    </tr>
+
+    {% endfor %}
+    </table>
+    </center>
+{% endif %}
+
+
+{%  if wickettakers_list %}
+<h2>Top3 WicketTakers</h2>
+    <center>
+<table>
+<tr><td><b>Bowler</b></td>
+    <td><b>Team</b></td>
+    <td><b>No_wickets</b></td>
+</tr>
+     {% for x in wickettakers_list %}
+<tr>
+    <td>{{x.bowler }}</td>
+   <td>{{ x.bowling_team }}</td>
+<td>{{ x.count }}</td>
+</tr>
+
+{% endfor %}
+    </table>
+    </center>
+{% endif %}
+<br><br>
+<div class="tab">
+  <button class="tablinks" onclick="displayinn(event, 'Innings1')">Innings1</button>
+  <button class="tablinks" onclick="displayinn(event, 'Innings2')">Innings2</button>
+</div>
+<center>
+<div id="Innings1" class="tabcontent" style="display:none">
+<h2>Innings1 Information</h2>
+<table>
+ <tr><td>Ball</td>
+    <td>total_runs</td>
+    <td>fielder</td></tr>
+    {% for x in innings1 %}
+       <tr><td>{{ x.ball }}</td>
+           <td>{{ x.total_runs }}</td>
+             <td>{{ x.fielder }}</td>
+    {% endfor %}
+</table>
+</div>
+<div id="Innings2" class="tabcontent" style="display:none">
+<h2>Innings2 Information</h2>
+<table>
+ <tr><td>Ball</td>
+    <td>total_runs</td>
+    <td>fielder</td></tr>
+    {% for x in innings2 %}
+       <tr><td>{{ x.ball }}</td>
+           <td>{{ x.total_runs }}</td>
+             <td>{{ x.fielder }}</td>
+    {% endfor %}
+</table>
+</div>
+</center>
+<!--{% if match_details %}
+    <center>
+    <h2>Ball to Ball Information</h2>
+    <table border="1">
+    <tr><td><b>Ball</b></td>
+        <td><b>total_runs</b></td>
+        <td><b>player_dismissed</b></td>
+        <td><b>dismissal_kind</b></td>
+        <td><b>fielder</b></td>
+    </tr>
+        {% for x in match_details %}
+           <tr><td>{{ x.ball }}</td>
+           <td>{{ x.total_runs }}</td>
+           <td>{{ x.player_dismissed }}</td>
+           <td>{{ x.dismissal_kind }}</td>
+           <td>{{ x.fielder }}</td>
+           </tr>
+
+{% endfor %}
+    </table>
+    </center>
+{% endif %}-->
+</html>

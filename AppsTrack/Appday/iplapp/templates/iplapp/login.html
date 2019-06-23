@@ -1,0 +1,29 @@
+{% load static %}
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="{% static 'forms.css' %}">
+<body align="center">
+
+<div class="login-page">
+    <h2>Login</h2><br><br>
+    <div class="form">
+<form name="form" method="POST">
+    {% csrf_token %}
+    {{form.username}}<br><br>
+   {{form.password}}<br><br>
+    <button type="Submit">Login</button><br><br>
+    <a href="{% url 'signupform' %}">Signup Here</a>
+</form>
+</div>
+</div>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags%} class="{{message.tags}}"{% endif %}>{{message}}</li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+</body>
+
+</html>
