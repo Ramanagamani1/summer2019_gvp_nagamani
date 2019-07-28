@@ -1,4 +1,4 @@
-/*#include "header.h"
+#include "header.h"
 
 int main()
 {
@@ -15,4 +15,4 @@ int main()
 	fwrite(num, sizeof(int), 6, fp);
 	for (int i = 0; i < 6; i++)
 		fprintf(fp, "%d", num[i]);
-}*/
+}
